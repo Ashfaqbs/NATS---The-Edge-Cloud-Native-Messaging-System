@@ -1,0 +1,12 @@
+version: '3.9'
+services:
+  nats:
+    image: nats:latest #  latest NATS Docker image
+    ports:
+      - "4222:4222"  # Client connections
+      - "8222:8222"  # HTTP monitoring
+    volumes:
+      - nats_data:/data # Mounts a Docker volume nats_data to /data inside the container to persist JetStream data.
+    command: ["-js", "-sd", "/data"] # Enables JetStream (-js) and sets the storage directory to /data (-sd /data).
+volumes:
+  nats_data:
