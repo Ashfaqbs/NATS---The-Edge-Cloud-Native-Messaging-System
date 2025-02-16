@@ -136,3 +136,63 @@ Acknowledged message
 
 PS C:\Users\ashfa>
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+To manage NATS JetStream via the command-line interface (CLI), we'll use the `nats` CLI tool. This utility allows us to interact with and manage NATS, including full JetStream management.
+
+**Installation:**
+
+For detailed installation instructions, refer to the [NATS CLI GitHub repository](https://github.com/nats-io/natscli).
+
+**Creating a Stream:**
+
+A stream in JetStream is a storage unit that retains messages for subjects. To create a stream named `mystream` that stores messages sent to the subject `mymessages`, we can use the following command:
+
+```bash
+nats stream add mystream --subjects "mymessages"
+```
+
+This command sets up a stream named `mystream` that listens to the subject `mymessages`.
+
+**Publishing a Message:**
+
+To publish a message to the `mymessages` subject, execute:
+
+```bash
+nats pub mymessages "Hello, NATS JetStream!"
+```
+
+This command sends the message "Hello, NATS JetStream!" to the `mymessages` subject.
+
+**Subscribing to a Stream:**
+
+To receive messages from a stream, we need to create a consumer. For a ``pull-based`` consumer named `myconsumer` on the `mystream` stream, run:
+
+```bash
+nats consumer add mystream myconsumer
+```
+
+After creating the consumer, we can pull messages using:
+
+```bash
+nats consumer next mystream myconsumer
+```
+
+This command retrieves messages from the `mystream` stream using the `myconsumer` consumer.
+
+For more detailed information and advanced configurations, refer to the [NATS JetStream Walkthrough](https://docs.nats.io/nats-concepts/jetstream/js_walkthrough).
